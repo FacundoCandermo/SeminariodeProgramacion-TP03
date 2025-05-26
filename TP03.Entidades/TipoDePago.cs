@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP03.Entidades
 {
-    internal class TipoDePago
+    public class TipoDePago
     {
         public int TipoDePagoId { get; set; }
         public string Descripcion { get; set; } = null!;

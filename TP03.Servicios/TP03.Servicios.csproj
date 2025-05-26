@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TP03.DatosSql\TP03.DatosSql.csproj" />
     <ProjectReference Include="..\TP03.Entidades\TP03.Entidades.csproj" />
   </ItemGroup>
 
