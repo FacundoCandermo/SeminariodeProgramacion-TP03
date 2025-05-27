@@ -11,6 +11,11 @@ namespace TP03.Entidades
         public int TipoDePagoId { get; set; }
         public string Descripcion { get; set; } = null!;
 
+        public int Monto { get; set; }
+
+        public TipoDePagoEnum tipodePagoEnum { get; set; }
+
+
         public override string ToString()
         {
             return $"{Descripcion}";
@@ -24,5 +29,14 @@ namespace TP03.Entidades
                 Descripcion = Descripcion
             };
         }
+    }
+    public enum TipoDePagoEnum
+    {
+        Efectivo = 1,
+        Débito,
+        Crédito,
+        Transferencia,
+        MercadoPago,
+        CuentaCorriente
     }
 }

@@ -38,5 +38,14 @@ namespace TP03.Servicios
             _tipoDePagoRepositorio.Borrar(tipoDePagoId);
         }
 
+        public bool Agregar(TipoDePago tipoDePago, out object errores)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Editar(TipoDePago tipoEditado, out object errores)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
