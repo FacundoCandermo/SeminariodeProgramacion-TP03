@@ -15,12 +15,11 @@ namespace TP03.Windows
 {
     public partial class FrmTipoDePago : Form
     {
-        private readonly TipoDePagoServicio _servicios;
+        private readonly TipoDePagoServicio _servicios = null!;
         private List<TipoDePago> list = null!;
-        public FrmTipoDePago(TipoDePagoServicio Servicio)
+        public FrmTipoDePago()
         {
             InitializeComponent();
-            _servicios = Servicio;
         }
 
         private void FrmTipoDePago_Load(object sender, EventArgs e)
@@ -63,8 +62,9 @@ namespace TP03.Windows
             if (tipoDePago is null) return;
             try
             {
-                if (_servicios.Agregar(tipoDePago, out var errores))
+                if (_servicios.Existe(tipoDePago))
                 {
+                    _servicios.Guardar(tipoDePago);
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvdatos);
                     GridHelper.SetearFila(r, tipoDePago);
                     GridHelper.AgregarFila(r, dgvdatos);
@@ -91,7 +91,7 @@ namespace TP03.Windows
             DataGridViewRow r = dgvdatos.SelectedRows[0];
             TipoDePago? tip = r.Tag as TipoDePago;
             if (tip is null) return;
-            DialogResult dr = MessageBox.Show($"¿desead borrar este pago de {tip}?",
+            DialogResult dr = MessageBox.Show($"¿desead borrar este monto de {tip}?",
                 "confirmar el borado",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
@@ -119,15 +119,16 @@ namespace TP03.Windows
             if (tip is null) return;
             TipoDePago? tipoEditado = tip.Clonar();
             FrmTipoDePagoAE frm = new FrmTipoDePagoAE() { Text = "Agrgar nuevo pago" };
-            DialogResult dr = frm.ShowDialog(this);
             frm.SetTipoDePago(tipoEditado);
+            DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel) return;
             tipoEditado = frm.GetTipoDePago();
             if (tipoEditado is null) return;
             try
             {
-                if (_servicios.Editar(tipoEditado, out var errores))
+                if (_servicios.Existe(tipoEditado))
                 {
+                    _servicios.Guardar(tipoEditado);
                     GridHelper.SetearFila(r, tipoEditado);
                     MessageBox.Show("Tipo de pago editado", "informacion",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
