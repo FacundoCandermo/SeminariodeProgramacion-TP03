@@ -39,7 +39,6 @@
             dgvdatos = new DataGridView();
             ColID = new DataGridViewTextBoxColumn();
             ColTipoDePago = new DataGridViewTextBoxColumn();
-            ColMonto = new DataGridViewTextBoxColumn();
             toolStrip1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvdatos).BeginInit();
@@ -125,7 +124,7 @@
             dgvdatos.AllowUserToAddRows = false;
             dgvdatos.AllowUserToDeleteRows = false;
             dgvdatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvdatos.Columns.AddRange(new DataGridViewColumn[] { ColID, ColTipoDePago, ColMonto });
+            dgvdatos.Columns.AddRange(new DataGridViewColumn[] { ColID, ColTipoDePago });
             dgvdatos.Dock = DockStyle.Fill;
             dgvdatos.Location = new Point(0, 0);
             dgvdatos.Name = "dgvdatos";
@@ -146,13 +145,6 @@
             ColTipoDePago.HeaderText = "Tipo De Pago";
             ColTipoDePago.Name = "ColTipoDePago";
             ColTipoDePago.ReadOnly = true;
-            // 
-            // ColMonto
-            // 
-            ColMonto.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ColMonto.HeaderText = "Monto";
-            ColMonto.Name = "ColMonto";
-            ColMonto.ReadOnly = true;
             // 
             // FrmTipoDePago
             // 
@@ -194,7 +186,5 @@
         private DataGridView dgvdatos;
         private DataGridViewTextBoxColumn ColID;
         private DataGridViewTextBoxColumn ColTipoDePago;
-        private DataGridViewTextBoxColumn ColMonto;
-
     }
 }

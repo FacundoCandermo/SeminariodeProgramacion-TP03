@@ -25,8 +25,8 @@ namespace TP03.Windows
             base.OnLoad(e);
             if (_tipoDePago is not null)
             {
-                _tipoDePago.tipodePagoEnum = (TipoDePagoEnum)CboTipoDePago.SelectedItem!;
-                TxtMonto.Text = _tipoDePago.Monto.ToString();
+                TxtTipoDePago.Text = _tipoDePago.Descripcion;
+
             }
         }
 
@@ -38,8 +38,7 @@ namespace TP03.Windows
                 {
                     _tipoDePago = new TipoDePago();
                 }
-                _tipoDePago.tipodePagoEnum = (TipoDePagoEnum)CboTipoDePago.SelectedItem!;
-                _tipoDePago.Monto = int.Parse(TxtMonto.Text.Trim());
+                _tipoDePago.Descripcion = TxtTipoDePago.Text.Trim();
                 DialogResult = DialogResult.OK;
             }
         }
@@ -48,10 +47,10 @@ namespace TP03.Windows
         {
             bool valido = true;
             errorProvider1.Clear();
-            if (string.IsNullOrEmpty(TxtMonto.Text.Trim()))
+            if (string.IsNullOrEmpty(TxtTipoDePago.Text.Trim()))
             {
                 valido = false;
-                errorProvider1.SetError(TxtMonto, "Es requerido el monto");
+                errorProvider1.SetError(TxtTipoDePago, "Es requerido el monto");
             }
             return valido;
         }
