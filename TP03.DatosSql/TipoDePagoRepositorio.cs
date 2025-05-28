@@ -22,11 +22,6 @@ namespace TP03.DatosSql
 
             }
         }
-        public void RecargarCache()
-        {
-            tiposDePagoCache.Clear();
-            LeerDatos();
-        }
         private void LeerDatos()
         {
             try
@@ -41,8 +36,8 @@ namespace TP03.DatosSql
                         {
                             while (reader.Read())
                             {
-                                TipoDePago fs = ConstruirTipoDePago(reader);
-                                tiposDePagoCache.Add(fs);
+                                TipoDePago pago = ConstruirTipoDePago(reader);
+                                tiposDePagoCache.Add(pago);
                             }
                         }
                     }
@@ -83,8 +78,8 @@ namespace TP03.DatosSql
                     {
                         while (reader.Read())
                         {
-                            TipoDePago fs = ConstruirTipoDePago(reader);
-                            lista.Add(fs);
+                            TipoDePago pago = ConstruirTipoDePago(reader);
+                            lista.Add(pago);
                         }
                     }
                 }
@@ -149,7 +144,7 @@ namespace TP03.DatosSql
                 }
                 if (_usarCache)
                 {
-                    RecargarCache();
+                    tiposDePagoCache.Add(pago);
                 }
             }
             catch (Exception ex)
@@ -159,11 +154,11 @@ namespace TP03.DatosSql
             }
         }
 
-        public void Borrar(int frutoId)
+        public void Borrar(int tipoDePagoId)
         {
             try
             {
-                using (var cnn = new tipoDePagoId(_connectionString))
+                using (var cnn = new SqlConnection(_connectionString))
                 {
                     cnn.Open();
                     string query = @"DELETE FROM TiposDePago WHERE TipoDePagoId=@TipoDePagoId";
@@ -175,7 +170,9 @@ namespace TP03.DatosSql
                 }
                 if (_usarCache)
                 {
-                    RecargarCache();
+                    TipoDePago? tpBorrar = tiposDePagoCache.FirstOrDefault(f => f.TipoDePagoId == tipoDePagoId);
+                    if (tpBorrar is null) return;
+                    tiposDePagoCache.Remove(tpBorrar);
                 }
             }
             catch (Exception ex)
@@ -204,7 +201,9 @@ namespace TP03.DatosSql
                 }
                 if (_usarCache)
                 {
-                    RecargarCache();
+                    TipoDePago? tpEditar = tiposDePagoCache.FirstOrDefault(t => t.TipoDePagoId == pago.TipoDePagoId);
+                    if (tpEditar is null) return;
+                    tpEditar.Descripcion = pago.Descripcion;
                 }
             }
             catch (Exception ex)
