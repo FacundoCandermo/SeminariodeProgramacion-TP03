@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TP03.Entidades;
+
+
 
 namespace TP03.DatosSql
 {
@@ -29,7 +33,7 @@ namespace TP03.DatosSql
                 using (var cnn = new SqlConnection(_connectionString))
                 {
                     cnn.Open();
-                    var query = @"SELECT TipoDePagoId, Descripcion FROM TiposDePago ORDER BY Descripcion";
+                    var query = @"SELECT FormaDePagoId, Descripcion FROM FormasDePago ORDER BY Descripcion";
                     using (var cmd = new SqlCommand(query, cnn))
                     {
                         using (var reader = cmd.ExecuteReader())
@@ -70,8 +74,8 @@ namespace TP03.DatosSql
             using (var cnn = new SqlConnection(_connectionString))
             {
                 cnn.Open();
-                string query = @"SELECT TipoDePagoId, Descripcion
-                        FROM TiposDePago ORDER BY Descripcion";
+                string query = @"SELECT FormaDePagoId, Descripcion
+                        FROM FormasDePago ORDER BY Descripcion";
                 using (var cmd = new SqlCommand(query, cnn))
                 {
                     using (var reader = cmd.ExecuteReader())
@@ -102,17 +106,17 @@ namespace TP03.DatosSql
                 using (var cnn = new SqlConnection(_connectionString))
                 {
                     cnn.Open();
-                    string query = pago.TipoDePagoId == 0 ? @"SELECT COUNT(*) FROM TiposDePago
+                    string query = pago.TipoDePagoId == 0 ? @"SELECT COUNT(*) FROM FormasDePago
                                 WHERE LOWER(Descripcion)=@Descripcion"
-                        : @"SELECT COUNT(*) FROM TiposDePago
+                        : @"SELECT COUNT(*) FROM FormasDePago
                                 WHERE LOWER(Descripcion)=@Descripcion
-                                AND TipoDePagoId<>@TipoDePagoId";
+                                AND FormaDePagoId<>@FormasDePagoId";
                     using (var cmd = new SqlCommand(query, cnn))
                     {
                         cmd.Parameters.AddWithValue("@Descripcion", pago.Descripcion);
                         if (pago.TipoDePagoId > 0)
                         {
-                            cmd.Parameters.AddWithValue("@FrutoSecoId", pago.TipoDePagoId);
+                            cmd.Parameters.AddWithValue("@FormaDePagoId", pago.TipoDePagoId);
                         }
                         return (int)cmd.ExecuteScalar() > 0;
                     }
@@ -133,7 +137,7 @@ namespace TP03.DatosSql
                 using (var cnn = new SqlConnection(_connectionString))
                 {
                     cnn.Open();
-                    string query = @"INSERT INTO TiposDePago (Descripcion) VALUES (@Descripcion);
+                    string query = @"INSERT INTO FormasDePago (Descripcion) VALUES (@Descripcion);
                                 SELECT SCOPE_IDENTITY();";
                     using (var cmd = new SqlCommand(query, cnn))
                     {
@@ -161,10 +165,10 @@ namespace TP03.DatosSql
                 using (var cnn = new SqlConnection(_connectionString))
                 {
                     cnn.Open();
-                    string query = @"DELETE FROM TiposDePago WHERE TipoDePagoId=@TipoDePagoId";
+                    string query = @"DELETE FROM FormasDePago WHERE FormaDePagoId=@FormaDePagoId";
                     using (var cmd = new SqlCommand(query, cnn))
                     {
-                        cmd.Parameters.AddWithValue("@TipoDePagoId", tipoDePagoId);
+                        cmd.Parameters.AddWithValue("@FormaDePagoId", tipoDePagoId);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -189,12 +193,12 @@ namespace TP03.DatosSql
                 using (var cnn = new SqlConnection(_connectionString))
                 {
                     cnn.Open();
-                    string query = @"UPDATE TiposDePago SET Descripcion=@Descripcion
-                    WHERE TipoDePagoId=@TipoDePagoId";
+                    string query = @"UPDATE FormasDePago SET Descripcion=@Descripcion
+                    WHERE FormaDePagoId=@FormaDePagoId";
                     using (var cmd = new SqlCommand(query, cnn))
                     {
                         cmd.Parameters.AddWithValue("@Descripcion", pago.Descripcion);
-                        cmd.Parameters.AddWithValue("@TipoDePagoId", pago.TipoDePagoId);
+                        cmd.Parameters.AddWithValue("@FormaDePagoId", pago.TipoDePagoId);
                         cmd.ExecuteNonQuery();
                     }
 
