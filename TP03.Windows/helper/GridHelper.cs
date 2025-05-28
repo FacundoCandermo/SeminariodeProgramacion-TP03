@@ -25,8 +25,7 @@ namespace TP03.Windows.helper
         public static void SetearFila(DataGridViewRow r, TipoDePago tipoDePago)
         {
             r.Cells[0].Value = tipoDePago.TipoDePagoId;
-            r.Cells[1].Value = tipoDePago.Monto;
-
+            r.Cells[1].Value = tipoDePago.Descripcion;
             r.Tag = tipoDePago;
         }
         public static void AgregarFila(DataGridViewRow r, DataGridView grid)

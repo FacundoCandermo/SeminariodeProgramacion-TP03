@@ -20,6 +20,7 @@ namespace TP03.Windows
         public FrmTipoDePago()
         {
             InitializeComponent();
+            _servicios = new TipoDePagoServicio();
         }
 
         private void FrmTipoDePago_Load(object sender, EventArgs e)
@@ -30,7 +31,7 @@ namespace TP03.Windows
                 MostrarDatosEnGrilla();
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
@@ -62,7 +63,7 @@ namespace TP03.Windows
             if (tipoDePago is null) return;
             try
             {
-                if (_servicios.Existe(tipoDePago))
+                if (!_servicios.Existe(tipoDePago))
                 {
                     _servicios.Guardar(tipoDePago);
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvdatos);
@@ -126,7 +127,7 @@ namespace TP03.Windows
             if (tipoEditado is null) return;
             try
             {
-                if (_servicios.Existe(tipoEditado))
+                if (!_servicios.Existe(tipoEditado))
                 {
                     _servicios.Guardar(tipoEditado);
                     GridHelper.SetearFila(r, tipoEditado);

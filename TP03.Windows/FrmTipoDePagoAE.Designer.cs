@@ -32,9 +32,7 @@
             btnOK = new Button();
             btnCancelar = new Button();
             errorProvider1 = new ErrorProvider(components);
-            label1 = new Label();
-            TxtMonto = new TextBox();
-            CboTipoDePago = new ComboBox();
+            TxtTipoDePago = new TextBox();
             label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
@@ -63,29 +61,12 @@
             // 
             errorProvider1.ContainerControl = this;
             // 
-            // label1
+            // TxtTipoDePago
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(10, 96);
-            label1.Name = "label1";
-            label1.Size = new Size(103, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Monto a Ingresar :";
-            // 
-            // TxtMonto
-            // 
-            TxtMonto.Location = new Point(119, 93);
-            TxtMonto.Name = "TxtMonto";
-            TxtMonto.Size = new Size(297, 23);
-            TxtMonto.TabIndex = 3;
-            // 
-            // CboTipoDePago
-            // 
-            CboTipoDePago.FormattingEnabled = true;
-            CboTipoDePago.Location = new Point(119, 48);
-            CboTipoDePago.Name = "CboTipoDePago";
-            CboTipoDePago.Size = new Size(297, 23);
-            CboTipoDePago.TabIndex = 5;
+            TxtTipoDePago.Location = new Point(119, 51);
+            TxtTipoDePago.Name = "TxtTipoDePago";
+            TxtTipoDePago.Size = new Size(297, 23);
+            TxtTipoDePago.TabIndex = 3;
             // 
             // label2
             // 
@@ -102,9 +83,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(506, 334);
             Controls.Add(label2);
-            Controls.Add(CboTipoDePago);
-            Controls.Add(TxtMonto);
-            Controls.Add(label1);
+            Controls.Add(TxtTipoDePago);
             Controls.Add(btnCancelar);
             Controls.Add(btnOK);
             Name = "FrmTipoDePagoAE";
@@ -119,10 +98,8 @@
         private Button btnOK;
         private Button btnCancelar;
         private ErrorProvider errorProvider1;
-        private TextBox TxtMonto;
-        private Label label1;
+        private TextBox TxtTipoDePago;
         private Label label2;
-        private ComboBox CboTipoDePago;
 
     }
 }
