@@ -11,6 +11,7 @@ namespace TP03.Entidades
         public int TipoDePagoId { get; set; }
         public string Descripcion { get; set; } = null!;
 
+
         public override string ToString()
         {
             return $"{Descripcion}";
@@ -25,4 +26,5 @@ namespace TP03.Entidades
             };
         }
     }
+   
 }
